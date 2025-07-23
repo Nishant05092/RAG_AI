@@ -145,6 +145,12 @@ def re_rank_cross_encoders(prompt: str, documents: list[str]) -> tuple[str, list
 # 🖥️ Streamlit App UI - Enhanced
 st.set_page_config(page_title="📖 RAG PDF Q&A", layout="wide")
 
+primaryColor="#f90404"
+backgroundColor="#f3f5f9"
+secondaryBackgroundColor="#5bc9cb"
+textColor="#040000"
+
+
 
 # 🔧 Sidebar Upload Section
 with st.sidebar:
@@ -162,12 +168,12 @@ with st.sidebar:
             add_to_vector_collection(all_splits, file_name_clean)
             st.info("📁 Document chunks added to vector DB.")
 
-# 🎯 Main App Interface
+#  Main App Interface
 st.title(" Smart Document QA System")
 st.markdown("Ask questions based on the content of your uploaded document.")
 
 prompt = st.text_area("🔎 Enter your question below:", placeholder="e.g., What are the key findings from this report?")
-ask = st.button("🎯 Ask the AI")
+ask = st.button("Ask the AI")
 
 # Layout split for better UX
 col1, col2 = st.columns([2, 1])
@@ -179,14 +185,14 @@ if ask and prompt:
         relevant_text, relevant_text_ids = re_rank_cross_encoders(prompt, context_chunks)
 
     with col1:
-        st.subheader("📜 Answer")
+        st.subheader("Generating Answer")
         st.write_stream(call_llm(context=relevant_text, prompt=prompt))
 
     with col2:
-        with st.expander("🔍 Retrieved Chunks"):
+        with st.expander("Retrieved Chunks"):
             st.write(results)
 
-        with st.expander("⭐ Top Ranked Chunks"):
+        with st.expander("Top Ranked Chunks"):
             st.write(relevant_text_ids)
             for idx in relevant_text_ids:
                 st.markdown(f"**Chunk {idx}:**")
@@ -195,6 +201,6 @@ if ask and prompt:
 # Optional: Footer
 st.markdown("---")
 st.markdown(
-    "<center><small>🚀 Built with Streamlit, LangChain, Ollama & ChromaDB</small></center>",
+    "<center><small> Built with Streamlit, LangChain, Ollama & ChromaDB</small></center>",
     unsafe_allow_html=True
 )
