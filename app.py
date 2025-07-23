@@ -145,12 +145,6 @@ def re_rank_cross_encoders(prompt: str, documents: list[str]) -> tuple[str, list
 # 🖥️ Streamlit App UI - Enhanced
 st.set_page_config(page_title="📖 RAG PDF Q&A", layout="wide")
 
-primaryColor="#f90404"
-backgroundColor="#f3f5f9"
-secondaryBackgroundColor="#5bc9cb"
-textColor="#040000"
-
-
 
 # 🔧 Sidebar Upload Section
 with st.sidebar:
